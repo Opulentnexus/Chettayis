@@ -298,13 +298,14 @@ Thumpoly
           </ul>
         </div>
   
-        <form class="subscribe" id="wa-subscribe-form">
+   <form class="subscribe" id="wa-subscribe-form">
   <input id="wa-name" type="text" placeholder="Your name (optional)">
-
   <textarea id="wa-msg" rows="3" placeholder="Type your request..." required></textarea>
-  <button type="submit">Send Message</button>
+  <button type="submit">Send via WhatsApp</button>
   <div id="wa-feedback"></div>
 </form>
+
+
 
   
       </div>
@@ -333,8 +334,6 @@ Thumpoly
 
 
 
-
-
 <script>
 (function () {
   const form = document.getElementById('wa-subscribe-form');
@@ -344,12 +343,11 @@ Thumpoly
   const DEST_PHONE = '+918921276403';
 
   /* Build WhatsApp message */
-  function buildMessage({ name, email, message }) {
-    let text = " Inquiry from website :\n\n";
+  function buildMessage({ name, message }) {
+    let text = "New inquiry from your website:\n\n";
     if (name) text += `Name: ${name}\n`;
-   
     text += `Message: ${message}\n\n`;
-   
+    text += "---\nSent from website contact form";
     return text;
   }
 
@@ -365,7 +363,6 @@ Thumpoly
     e.preventDefault();
 
     const name = form.querySelector("#wa-name").value.trim();
-    const email = form.querySelector("#wa-email").value.trim();
     const message = form.querySelector("#wa-msg").value.trim();
     const feedback = document.getElementById("wa-feedback");
 
@@ -376,24 +373,15 @@ Thumpoly
       return;
     }
 
-    if (email) {
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(email)) {
-        feedback.textContent = "Please enter a valid email.";
-        feedback.style.color = "crimson";
-        return;
-      }
-    }
-
-    /* Build full WhatsApp message */
-    const fullMessage = buildMessage({ name, email, message });
+    /* Build WhatsApp message */
+    const fullMessage = buildMessage({ name, message });
 
     /* Open WhatsApp */
     openWhatsApp(DEST_PHONE, fullMessage);
 
     /* Feedback */
     feedback.textContent = "WhatsApp opened — please press Send.";
-    feedback.style.color = "#25D366"; // WhatsApp green
+    feedback.style.color = "#25D366";
 
     /* Clear message field only */
     form.querySelector("#wa-msg").value = "";
@@ -403,6 +391,11 @@ Thumpoly
   });
 })();
 </script>
+
+
+
+
+
 
 
 
@@ -449,6 +442,4 @@ Thumpoly
 
 </body>
 </html>
-
-
 
