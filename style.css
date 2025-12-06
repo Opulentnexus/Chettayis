@@ -1,0 +1,1660 @@
+/* ======================
+   GLOBAL STYLES
+====================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #faf7f2;
+    color: #333;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+
+:root { --nav-h: 75px; }
+
+#about::before,
+#services::before,
+#menu::before,
+#gallery::before,
+#reviews-title::before,
+#contact::before {
+  content: "";
+  display: block;
+  height: var(--nav-h);
+  margin-top: calc(-1 * var(--nav-h));
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+
+
+
+/* ======================
+   PREMIUM NAVBAR
+====================== */
+.navbar {
+    width: 100%;
+    height: 75px;
+    padding: 0 3%;  /* logo closer to the left */
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px) saturate(160%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Navbar changes on scroll */
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* ======================
+   LOGO (Left)
+====================== */
+.logo {
+    font-size: 1.68rem;
+    font-family: 'Pacifico', cursive;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #000000;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    /* keeps logo to left */
+    margin-right: auto;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+}
+
+/* ======================
+   NAV LINKS (Right)
+====================== */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+
+    /* pushes links to right */
+    margin-left: auto;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.05rem;
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+    transition: 0.3s ease;
+}
+
+/* Elegant underline */
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background: #d4a059;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #d4a059;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+
+/* ======================
+   HAMBURGER (Mobile)
+====================== */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.8rem; 
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.hamburger:hover {
+    color: #facc15;
+    transform: scale(1.05);
+}
+
+/* ===== Make right-side menu items fill the panel vertically ===== */
+@media (max-width: 768px) {
+
+  /* base collapsed rail (keep your hidden-off-screen behavior) */
+  .nav-links {
+    position: fixed;
+    top: 8%;                 /* bring panel a little higher so it can use more height */
+    right: -220px;           /* keep hidden when closed */
+    width: 200px;
+    max-height: 84vh;        /* allow the panel to use most of viewport */
+    background-color: #fff;
+    flex-direction: column;
+    padding: 18px 14px;
+    gap: 8px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: right 0.28s ease, opacity 0.28s ease, padding 0.28s ease;
+    z-index: 1100;
+    overflow-y: auto;
+    display: flex;           /* ensure flex layout */
+    align-items: stretch;    /* children take full width */
+    justify-content: flex-start; /* default; will change when active */
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  /* ensure list items don't create extra spacing and take full width */
+  .nav-links li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+  }
+
+  /* links centered horizontally but take full width; smaller internal padding */
+  .nav-links li a {
+    color: #000;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 12px 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* centers the label horizontally inside each slot */
+    transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-links li a:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+
+  /* ===== Active (open) panel: expand and distribute items evenly ===== */
+  .nav-links.active {
+    right: 10px;             /* slide in */
+    opacity: 1;
+    max-height: 84vh;
+    height: 84vh;            /* force panel height so children can be distributed */
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;    /* children = full width */
+    justify-content: space-evenly; /* <-- distribute items to fill the panel vertically */
+    overflow-y: auto;
+  }
+
+  /* make sure link content lines up and is readable in the larger panel */
+  .nav-links.active li a {
+    justify-content: center; /* keep text centered */
+    font-size: 1rem;
+    padding: 12px 14px;
+  }
+
+  /* if there are many items, let them scroll but still look filled */
+  .nav-links.active::-webkit-scrollbar { width: 6px; }
+  .nav-links.active::-webkit-scrollbar-thumb { background: #d4a059; border-radius: 10px; }
+
+}
+
+/* ===== Add icons to mobile menu items (CSS only) ===== */
+@media (max-width: 768px) {
+
+  .nav-links li a {
+    position: relative;
+    padding-left: 36px; /* space for icon */
+  }
+
+  .nav-links li a::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 16px;
+    color: #ff7400;  /* your theme orange */
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: "";  /* default */
+  }
+
+  /* Assign icons by menu item order */
+  .nav-links li:nth-child(1) a::before { content: "\f015"; } /* Home icon */
+  .nav-links li:nth-child(2) a::before { content: "\f007"; } /* About (User) */
+  .nav-links li:nth-child(3) a::before { content: "\f013"; } /* Services (Gear) */
+  .nav-links li:nth-child(4) a::before { content: "\f2e7"; } /* Menu (Utensils) */
+  .nav-links li:nth-child(5) a::before { content: "\f03e"; } /* Gallery (Image) */
+  .nav-links li:nth-child(6) a::before { content: "\f005"; } /* Reviews (Star) */
+  .nav-links li:nth-child(7) a::before { content: "\f095"; } /* Contact (Phone) */
+
+}
+
+
+
+
+
+
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* prevent horizontal scroll showing page background */
+}
+
+
+
+
+
+
+
+/* ===== Hero: stable across zoom and avoids right-side gap ===== */
+.hero {
+    min-height: 100vh;            /* full viewport height */
+    width: 100%;                  /* avoid 100vw usage which causes scrollbar issues */
+    display: flex;
+    align-items: center;
+    background-image: url('hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #222;
+    overflow: hidden;             /* prevents tiny background shift artifacts when zooming */
+}
+
+/* inner container keeps the visual padding but doesn't affect background sizing */
+.hero-inner {
+    width: 100%;
+    padding: 0 6%;                /* move padding here */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.hero-content {
+    max-width: 550px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 40px 35px;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    margin-top: 40px;  
+}
+
+
+.hero h1 {
+    font-size: 3.2rem;
+    font-family: "Unbounded", sans-serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    margin-bottom: 35px;
+    font-family: "Comfortaa", sans-serif;
+    color: #444;
+}
+.buttons {
+    display: flex;
+    gap: 18px;
+}
+
+.btn {
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-family: "Comfortaa", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+/* Primary Button */
+.btn.primary {
+    background: #ff7400;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(255, 116, 0, 0.3);
+}
+
+.btn.primary:hover {
+    background: #000000;
+    transform: translateY(-3px);
+}
+
+/* Secondary Button */
+.btn.secondary {
+    border: 2px solid #ffffff;
+    color: #ff7400;
+    background: transparent;
+}
+
+.btn.secondary:hover {
+    background: #000000;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* ============================= */
+/*       MOBILE (Smaller)        */
+/* ============================= */
+@media (max-width: 600px) {
+
+    .buttons {
+        flex-direction: column;   /* stack buttons vertically */
+        width: 100%;
+        gap: 14px;                /* spacing between stacked buttons */
+        align-items: stretch;     /* full width buttons */
+    }
+
+    .btn {
+        width: 100%;              /* make buttons full width */
+        padding: 16px 0;          /* taller, cleaner look */
+        font-size: 0.95rem;       /* better readability */
+        border-radius: 25px;
+        text-align: center;
+    }
+
+      .hero h1 {
+    margin-left: -15.1px;   /* move right */
+    /* margin-right: 10px;  move left */
+    /* You can increase to 15px / 20px until it looks perfect */
+  }
+
+}
+
+
+
+/* ---- Split reveal: heading left, paragraph right, buttons pop ---- */
+
+/* base hidden state when JS is present */
+.js .hero-content {
+  --stagger-base: 120ms; /* control overall stagger speed */
+}
+
+/* heading (left slide with clip reveal) */
+.js .hero-content > h1 {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: transform 520ms cubic-bezier(.2,.9,.2,1) var(--stagger-base),
+              opacity 420ms cubic-bezier(.2,.9,.2,1) var(--stagger-base);
+  /* clip-path to create a neat masked reveal */
+  clip-path: inset(0 100% 0 0);
+  transition-property: transform, opacity, clip-path;
+}
+
+/* paragraph (right slide) */
+.js .hero-content > p {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: transform 520ms cubic-bezier(.2,.9,.2,1) calc(var(--stagger-base) * 2),
+              opacity 420ms cubic-bezier(.2,.9,.2,1) calc(var(--stagger-base) * 2);
+  clip-path: inset(0 0 0 100%);
+  transition-property: transform, opacity, clip-path;
+}
+
+/* buttons (pop) */
+.js .hero-content .buttons {
+  opacity: 0;
+  transform: translateY(8px) scale(.98);
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1) calc(var(--stagger-base) * 3),
+              opacity 420ms cubic-bezier(.2,.9,.2,1) calc(var(--stagger-base) * 3);
+}
+
+/* visible states */
+.js .hero-content.is-visible > h1 {
+  opacity: 1;
+  transform: translateX(0);
+  clip-path: inset(0 0 0 0);
+}
+
+.js .hero-content.is-visible > p {
+  opacity: 1;
+  transform: translateX(0);
+  clip-path: inset(0 0 0 0);
+}
+
+.js .hero-content.is-visible .buttons {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* small extra polish: buttons children stagger (if you want per-button) */
+.js .hero-content.is-visible .buttons > * {
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1) var(--btn-delay, 0ms),
+              opacity 420ms cubic-bezier(.2,.9,.2,1) var(--btn-delay, 0ms);
+  opacity: 1;
+  transform: none;
+}
+
+/* set per-button delays (first button 0ms, second 80ms) */
+.js .hero-content .buttons > *:nth-child(1) { --btn-delay: calc(var(--stagger-base) * 3); }
+.js .hero-content .buttons > *:nth-child(2) { --btn-delay: calc(var(--stagger-base) * 4); }
+
+/* give a tiny hover lift for primary button (only when visible) */
+.js .hero-content.is-visible .btn.primary:hover { transform: translateY(-4px); }
+
+/* reduce motion preference: disable all transitions/animations */
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-content,
+  .js .hero-content * {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    clip-path: none !important;
+  }
+}
+
+
+
+
+
+
+
+/* MAIN WRAPPER */
+.about-section{
+  max-width:1150px;
+  margin:60px auto;
+  padding:40px;
+  
+ 
+}
+
+/* GRID */
+.about-inner{
+  display:grid;
+  gap:var(--gap);
+  grid-template-columns:1fr;
+  align-items:center;
+}
+
+/* IMAGE — only desktop */
+.about-img{ display:none; }
+.about-img img{
+  width:450px;
+   border-radius:25px;
+  
+
+  opacity:0;
+  transform:translateY(40px);
+}
+
+/* TEXT */
+.about-text{
+  opacity:0;
+  transform:translateY(40px);
+}
+.kicker{
+  color:var(--accent);
+  font-weight:700;
+  letter-spacing:1px;
+}
+h2{
+  font-size:28px;
+  font-weight:800;
+  margin:10px 0;
+}
+.lead{
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* FEATURES */
+.features{
+  display:grid;
+  gap:20px;
+  padding-top: 20px;
+}
+.feature{
+  background:#dadadb;
+  padding:20px;
+   border-radius:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  transform:translateY(30px);
+  opacity:0;
+  transition:.3s;
+}
+.feature:hover{
+  transform:translateY(-8px);
+}
+
+.icon{
+  width:50px;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:#eef2ff;
+  color:var(--accent);
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+/* DESKTOP VIEW */
+@media(min-width:1025px){
+  .about-inner{
+    grid-template-columns:450px 1fr;
+  }
+  .about-img{ display:block; }
+  .features{ grid-template-columns:repeat(3,1fr); }
+}
+
+/* ANIMATION */
+.fade-up{
+  animation:fadeUp 0.9s forwards;
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+
+@media (min-width:1025px){
+  .about-img {
+    transform: translateX(-100px);
+  
+  }
+}
+
+
+
+
+
+  
+
+/* ================================
+   SERVICES SECTION
+================================ */
+
+#services {
+    padding: 80px 20px;
+    text-align: center;
+    font-family: "Comfortaa", sans-serif;
+    padding-top: 22px;
+    
+}
+
+.section-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: #222;
+    font-family: "Comfortaa", sans-serif;
+}
+
+/* Grid layout */
+.services {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Service Card Style */
+.service-card {
+    padding: 30px 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect */
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.12);
+}
+
+/* Decorative Gradient Overlay */
+.service-card::before {
+    content: "";
+    position: absolute;
+    width: 160%;
+    height: 160%;
+    background: linear-gradient(135deg, #ff8a00, #ff5e00);
+    top: -120%;
+    left: -30%;
+    transform: rotate(12deg);
+    transition: 0.5s ease;
+    opacity: 0;
+}
+
+.service-card:hover::before {
+    top: 0;
+    opacity: 0.20;
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: #ff7400;
+    z-index: 2;
+    position: relative;
+}
+
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.6rem;
+    color: #444;
+    font-family: "Comfortaa", sans-serif;
+    position: relative;
+    z-index: 2;
+}
+
+
+
+
+/* ===== Service card: centered image + text (paste below your services CSS) ===== */
+.services .service-card {
+  /* keep original look but make content stack and center */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;               /* spacing between image, title, description */
+  padding: 22px 24px;      /* slight tweak to give breathing room */
+  box-sizing: border-box;
+}
+
+/* target only the image inside a service-card */
+.services .service-card .service-icon {
+  width: 100%;             /* keep it full-width inside card */
+  max-width: 460px;        /* limit how wide the image can grow */
+  height: 200px;           /* fixed height for consistent crop */
+  object-fit: cover;       /* crop the image nicely without stretching */
+  border-radius: 12px;     /* rounded corners like your mock */
+  display: block;
+  margin: 6px auto 10px;   /* center and space from the text */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+/* Title styling — centered and using brand color */
+.services .service-card h3 {
+  font-size: 1.5rem;           /* a bit larger for emphasis */
+  line-height: 1.2;
+  margin: 6px 0 8px;
+  color: #ff7400;              /* your orange brand */
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* Description centered and constrained for readability */
+.services .service-card p {
+  max-width: 92%;
+  margin: 0 auto;
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Mobile tweaks: smaller title, shorter image height */
+@media (max-width: 600px) {
+  .services .service-card .service-icon {
+    height: 160px;
+    max-width: 100%;
+  }
+  .services .service-card h3 {
+    font-size: 1.35rem;
+  }
+  .services .service-card p {
+    font-size: 0.98rem;
+  }
+}
+
+
+
+
+
+/* ===================================================
+   SCROLL ANIMATIONS
+=================================================== */
+
+[data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.9s ease-out;
+}
+
+[data-animate].active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Custom animation types */
+[data-animate="fade-up"] {
+    transform: translateY(40px);
+}
+
+[data-animate="slide-left"] {
+    transform: translateX(60px);
+}
+
+[data-animate="slide-right"] {
+    transform: translateX(-60px);
+}
+
+[data-animate="fade-up"].active,
+[data-animate="slide-left"].active,
+[data-animate="slide-right"].active {
+    transform: translate(0,0);
+}
+
+
+
+/* Center the second row (last 2 items) on desktop */
+@media (min-width: 992px) {
+    .services {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        justify-items: center;   /* ensures children center inside their cell */
+    }
+
+    /* Select item 5 & 6 and move them to the center */
+    .services .service-card:nth-child(5),
+    .services .service-card:nth-child(6) {
+        grid-column: span 2;      /* makes them double width */
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ===================================================
+   RESPONSIVE — TABLET (700px - 1024px)
+=================================================== */
+
+@media (max-width: 1024px) {
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        
+    }
+
+    .service-card {
+        padding: 28px 20px;
+    }
+}
+
+
+/* ===================================================
+   RESPONSIVE — MOBILE (Up to 600px)
+=================================================== */
+
+@media (max-width: 600px) {
+
+    #services {
+        padding: 60px 20px;
+        padding-top: 0px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 35px;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service-card {
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .service-card p {
+        font-size: 0.95rem;
+    }
+}
+
+
+
+/* ======================
+   CONTACT FORM
+====================== */
+.contact-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.contact-form textarea {
+    min-height: 130px;
+    grid-column: 1 / -1;
+}
+
+input, textarea {
+    padding: 14px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #d4a059;
+}
+
+/* ======================
+   FOOTER
+====================== */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* ======================
+   ANIMATIONS
+====================== */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s ease;
+}
+
+.fade-up,
+.slide-left,
+.slide-right {
+    opacity: 1;
+    transform: translate(0);
+}
+
+[data-animate="slide-left"] {
+    transform: translateX(60px);
+}
+
+[data-animate="slide-right"] {
+    transform: translateX(-60px);
+}
+
+/* ======================
+   RESPONSIVE BREAKPOINTS
+====================== */
+
+@media (max-width: 992px) {
+    .hero h1 { font-size: 2.6rem; }
+}
+
+@media (max-width: 768px) {
+
+    /* Mobile Navbar */
+    .hamburger {
+        display: block;
+        color: #333;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40px;
+        gap: 25px;
+        transition: 0.3s ease;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        padding: 0 15px;
+    }
+
+    .about {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-stats {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 { font-size: 1.7rem; }
+    .hero p { font-size: 0.95rem; }
+}
+
+
+
+
+
+
+
+:root{
+  --gap: 12px;
+  --accent: #ff7400;
+  --bg: #faf7f2;
+}
+
+/* Section + heading */
+.gallery-section {
+  padding: 36px 14px;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  font-family: "Comfortaa", sans-serif;
+}
+.gallery-title {
+  font-size: 1.9rem;
+  padding-bottom: 30px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #222;
+}
+
+/* ===== WRAPPER ===== */
+.gallery-wrap{
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== TRACK: horizontal swipe on small screens ===== */
+.gallery-track{
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* hide native scrollbar but still scrollable */
+.gallery-track::-webkit-scrollbar { height: 8px; }
+.gallery-track::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 8px; }
+.gallery-track { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.12) transparent; }
+
+/* single-row cards (mobile & tablet) */
+.gallery-track img{
+  scroll-snap-align: center;
+  flex: 0 0 84%;            /* mobile: each slide ~84% width */
+  width: 84%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 12px 34px rgba(0,0,0,0.06);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  display: block;
+}
+
+/* slightly smaller gap & show peek of next slide */
+@media(min-width:420px){
+  .gallery-track img{ flex-basis: 78%; width:78%; }
+}
+@media(min-width:600px){
+  .gallery-track img{ flex-basis: 62%; width:62%; border-radius:14px; }
+}
+@media(min-width:900px){
+  /* tablet landscape still single-row but show more of next */
+  .gallery-track img{ flex-basis: 48%; width:48%; }
+}
+
+/* desktop: switch to multi-column grid (no horizontal scroll) */
+@media(min-width:1200px){
+  .gallery-track{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding-bottom: 0;
+  }
+  .gallery-track img{
+    flex: none;
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
+    transform: none;
+  }
+}
+
+/* hover lift on non-touch */
+@media (hover: hover){
+  .gallery-track img:hover{
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  }
+}
+
+/* ===== Controls (prev/next) ===== */
+.gallery-prev, .gallery-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.94);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  font-size: 22px;
+  color: #222;
+  cursor: pointer;
+  display: none; /* hidden on very small devices; shown on wider touch devices */
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+.gallery-prev{ left: 8px; }
+.gallery-next{ right: 8px; }
+
+/* show controls on medium+ screens (you can toggle) */
+@media(min-width: 420px){
+  .gallery-prev, .gallery-next { display: flex; }
+}
+@media(min-width: 1200px){
+  /* hide for desktop grid */
+  .gallery-prev, .gallery-next { display: none; }
+}
+
+/* ===== Dots (optional) ===== */
+.gallery-dots{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin-top:12px;
+  pointer-events:none;
+}
+.gallery-dots button{
+  width:8px;height:8px;border-radius:50%;border:none;background:rgba(0,0,0,0.14);pointer-events:auto;
+}
+.gallery-dots button.active{ background: var(--accent); transform: scale(1.2); }
+
+/* accessibility: ensure images aren't focus outline weirdness */
+.gallery-track img:focus { outline: 3px solid rgba(255,116,0,0.14); }
+
+/* small devices tweaks */
+@media(max-width:380px){
+  .gallery-track img{ flex-basis: 90%; width:90%; border-radius:10px; }
+  .gallery-prev, .gallery-next{ width:40px; height:40px; font-size:20px; }
+}
+
+
+
+
+/* ----- show dots only on small/medium screens ----- */
+/* hide by default (desktop-safe) */
+.gallery-dots {
+  display: none !important;
+}
+
+/* show on devices narrower than desktop breakpoint */
+@media (max-width: 1199px) {
+  .gallery-dots {
+    display: flex !important;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+    pointer-events: auto;
+  }
+}
+
+/* extra: ensure prev/next are also hidden on desktop (safety) */
+@media (min-width: 1200px) {
+  .gallery-prev,
+  .gallery-next {
+    display: none !important;
+  }
+}
+
+
+
+
+
+
+/* ===== Scroll-trigger animation for gallery images ===== */
+
+/* initial hidden state (keeps your existing layout) */
+.gallery-track img {
+  /* keep existing rules; add initial animation state */
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition: transform 520ms cubic-bezier(.2,.9,.2,1), opacity 420ms ease;
+  will-change: transform, opacity;
+}
+
+/* visible state applied by JS when image enters viewport */
+.gallery-track img.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* add a gentle stagger using a CSS variable (set by JS) */
+.gallery-track img.in-view {
+  transition-delay: var(--delay, 0ms);
+}
+
+/* stronger effect when on desktop grid (keep subtle) */
+@media (min-width: 1200px) {
+  .gallery-track img {
+    opacity: 0;
+    transform: translateY(14px) scale(0.995);
+  }
+  .gallery-track img.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ensure hover transform doesn't conflict when in-view */
+@media (hover: hover) {
+  .gallery-track img:hover {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+
+
+/* ===== Gallery Title Scroll Animation ===== */
+
+.gallery-title {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  will-change: opacity, transform;
+}
+
+.gallery-title.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+/* Section */
+.reviews {
+  padding: 2rem 0;
+}
+
+.reviews h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* -------------------------------------- */
+/* SCROLL ANIMATION: HEADING */
+/* -------------------------------------- */
+
+/* visible by default (no-JS users) */
+.reveal-heading {
+  opacity: 1;
+  transform: none;
+  will-change: transform, opacity;
+}
+
+/* JS-enabled starts hidden */
+.js .reveal-heading {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 420ms cubic-bezier(.2,.9,.2,1),
+              transform 420ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* when JS adds .is-visible */
+.js .reveal-heading.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -------------------------------------- */
+/* Review List */
+.review-list {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Review Card base */
+.review-card {
+  background: #ffffff;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  will-change: transform, opacity;
+  opacity: 1;
+  transform: none;
+}
+
+/* JS-enabled starts hidden for animation */
+.js .review-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 420ms cubic-bezier(.2,.9,.2,1) var(--delay, 0ms),
+              transform 420ms cubic-bezier(.2,.9,.2,1) var(--delay, 0ms);
+}
+
+/* When JS toggles .is-visible */
+.js .review-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Review header */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Name */
+.review-name {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Review Text */
+.review-text {
+  margin-top: 0.8rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* -------------------------------------- */
+/* Stars — WebKit Compatible */
+/* -------------------------------------- */
+.stars {
+  --star-size: 18px;
+  --star-color: #ddd;
+  --star-filled: #f4b400;
+  display: inline-block;
+  font-size: var(--star-size);
+  line-height: 1;
+  font-family: "Times New Roman", serif;
+  letter-spacing: 3px;
+}
+
+.stars::before {
+  content: "★★★★★";
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    var(--star-filled) var(--rating-percent, 100%),
+    var(--star-color) var(--rating-percent, 100%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* rating percent mapping */
+.stars[data-rating="0"] { --rating-percent: 0%; }
+.stars[data-rating="1"] { --rating-percent: 20%; }
+.stars[data-rating="2"] { --rating-percent: 40%; }
+.stars[data-rating="3"] { --rating-percent: 60%; }
+.stars[data-rating="4"] { --rating-percent: 80%; }
+.stars[data-rating="5"] { --rating-percent: 100%; }
+
+/* Desktop layout */
+@media (min-width: 900px) {
+  .review-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* -------------------------------------- */
+/* Reduced motion support */
+/* -------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal-heading,
+  .js .review-card,
+  .js .review-card.is-visible {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+
+
+
+
+
+footer {
+  
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+ 
+}
+
+
+
+
+.footer-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    font-family: "Comfortaa", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+ /* CENTER BRAND BLOCK */
+.footer-brand {
+    display: flex;
+    flex-direction: column;   /* stack logo + name + tagline */
+    justify-content: center;
+    align-items: center;      /* <-- center horizontally */
+    text-align: center;
+    gap: 10px;
+    margin: 0 auto 10px;      /* center the whole block */
+}
+
+.footer-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+  
+  .brand-title {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  
+  .brand-tag {
+    margin: 3px 0 0;
+    color: #bfbfc9;
+    font-size: 0.95rem;
+  }
+  
+  /* Grid Layout */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 35px;
+  }
+  
+  /* Boxes */
+  .footer-box h4 {
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+  }
+  
+  .footer-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .footer-list li {
+    margin: 8px 0;
+    color: #d8d8e0;
+  }
+  
+  .footer-list li a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  
+  .footer-list li a:hover {
+    color: #ff7a00;
+  }
+  
+ /* Social Icons */
+.socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    justify-content: center;   /* ← CENTER ICONS */
+    align-items: center;       /* ← vertical centering */
+  }
+  
+  .social {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #fff;
+    transition: 0.2s;
+  }
+  
+  .social:hover {
+    background: #ff7a00;
+    transform: translateY(-3px);
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+ /* WhatsApp Message Form (Replaces .subscribe styles) */
+.subscribe {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Input fields */
+.subscribe input,
+.subscribe textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: "Comfortaa", sans-serif;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  outline: none;
+  resize: none;
+  font-size: 15px;
+}
+
+/* Placeholder color (light & soft) */
+.subscribe input::placeholder,
+.subscribe textarea::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+/* Button */
+.subscribe button {
+  width: 100%;
+  padding: 12px 14px;
+  background: #25D366;   /* WhatsApp green */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.subscribe button:hover {
+  background: #1ebe5d; /* darker WhatsApp green */
+}
+
+/* Feedback message */
+#wa-feedback {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+  /* Footer Bottom */
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 30px;
+    padding-top: 14px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    color: #c4c4cc;
+    font-family: "Comfortaa", sans-serif;
+    
+    
+  }
+  
+  .legal {
+    list-style: none;
+    display: flex;
+    
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .legal a {
+    color: #c4c4cc;
+    
+    text-decoration: none;
+  }
+  
+  .legal a:hover {
+    color: #ff7a00;
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .footer-bottom {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  @media (max-width: 550px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .subscribe {
+      flex-direction: column;
+    }
+  
+    .subscribe button {
+      width: 100%;
+    }
+  }
+
+
+
+
+
+footer a {
+  color: #ff7a00;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+
+

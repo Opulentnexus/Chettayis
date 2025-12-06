@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catering Services</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script>document.documentElement.classList.add('js');</script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">Chettayis</div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews-title">Reviews</a></li>
+        <li><a href="#footer">Contact</a></li>
+    </ul>
+
+    <!-- Mobile toggle -->
+    <div class="hamburger" onclick="toggleMenu()">
+        ☰
+    </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1>Premium Catering for Your Moments</h1>
+      <p>We bring together taste, elegance, and heartfelt service to make every event unforgettable.</p>
+
+      <div class="buttons">
+        <a href="http://Wa.me/+918921276403" class="btn primary">Book Now</a>
+        <a href="#services" class="btn secondary">View Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ <section class="about-section" id="about">
+  <div class="about-inner">
+
+    <div class="about-img">
+      <img src="chettayis.jpeg" alt="">
+    </div>
+
+    <div class="about-text">
+      <span class="kicker">ABOUT US</span>
+      <h2>Perfectly crafted catering and event plans.</h2>
+      <p class="lead">
+        Chettayis Events began in 2018 with one goal — to deliver high-quality, value-focused event management and catering. After the setback of the 2020 pandemic, we returned stronger, supported by the trust of our clients. Today, we’ve proudly served over 1,000 customers across Kerala. We handle every detail with care, professionalism, and a personal touch — like an elder brother guiding your special day. Whether it’s a wedding, corporate event, or celebration, we create memorable experiences that let you relax and enjoy every moment.
+      </p>
+
+      <div class="features">
+
+        <div class="feature">
+          
+          <h3>8+ Years</h3>
+          <p>Experience</p>
+        </div>
+
+        <div class="feature">
+         
+          <h3>1000+ Events</h3>
+          <p>Successfully Served</p>
+        </div>
+
+        <div class="feature">
+         
+          <h3>Team of experts
+</h3>
+          <p>Chefs & Staff</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+const elements = document.querySelectorAll('.about-img img, .about-text, .feature');
+
+const revealOnScroll = () => {
+  const trigger = window.innerHeight * 0.85;
+
+  elements.forEach(el => {
+    const rect = el.getBoundingClientRect().top;
+    if(rect < trigger){
+      el.classList.add('fade-up');
+    }
+  });
+};
+
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+    <h2 class="section-title" data-animate="fade-up">Our Services</h2>
+
+    <div class="services">
+
+        <div class="service-card" data-animate="slide-right">
+            <img src="event.jpg" class="service-icon" alt="">
+            <h3>Event Management & Planning</h3>
+            <p>Expert event planning that brings your celebrations to life.</p>
+        </div>
+
+        <div class="service-card" data-animate="slide-left">
+            <img src="chettayis.jpeg" class="service-icon" alt="">
+            <h3>Ceremonies & Rituals</h3>
+            <p>Blending tradition and elegance to craft memorable ceremonies.</p>
+        </div>
+
+        <div class="service-card" data-animate="slide-right">
+            <img src="image1.jpeg" class="service-icon" alt="">
+            <h3>Photography & Videography</h3>
+            <p>Capturing your moments with stunning photography and cinematic videography.</p>
+        </div>
+
+        <div class="service-card" data-animate="slide-left">
+            <img src="perform.jpg" class="service-icon" alt="">
+            <h3>Entertainment & Perfomances</h3>
+            <p>Experience captivating performances that elevate every occasion.</p>
+        </div>
+
+        <div class="service-card" data-animate="slide-left">
+            <img src="guest.jpg" class="service-icon" alt="">
+            <h3>Guest Management & Hospitality</h3>
+            <p>Warm hospitality and smooth coordination for all your event guests.</p>
+        </div>
+
+        <div class="service-card" data-animate="slide-left">
+            <img src="catering.jpg" class="service-icon" alt="">
+            <h3>Cuisine & Catering</h3>
+            <p>Live food counters, premium buffet and a memorable food experience.</p>
+        </div>
+
+
+    </div>
+</section>
+
+
+<section id="gallery" class="gallery-section">
+  <h2 class="gallery-title">Gallery</h2>
+
+  <div class="gallery-wrap">
+    <div class="gallery-track">
+    <img src="img4.jpg" alt="">
+    <img src="img3.jpg" alt="">
+    <img src="img7.jpg" alt="">
+    <img src="img5.jpg" alt="">
+    <img src="img1.jpg" alt="">
+    <img src="img2.jpg" alt="">
+    <img src="img6.jpg" alt="">
+    
+    <img src="img8.jpg" alt="">
+  </div>
+ <!-- optional controls (JS will wire these) -->
+    <button class="gallery-prev" aria-label="Previous">‹</button>
+    <button class="gallery-next" aria-label="Next">›</button>
+
+    <!-- optional dots container (filled by JS) -->
+    <div class="gallery-dots" aria-hidden="true"></div>
+  </div>
+</section>
+
+
+  
+
+
+
+<section class="reviews" aria-labelledby="reviews-title">
+  <div class="container">
+    <h2 id="reviews-title" class="reveal-heading">What Our Customers Say</h2>
+
+    <ul class="review-list">
+      <li class="review-card" data-i="0">
+        <div class="review-header">
+          <h3 class="review-name">Priya S.</h3>
+          <div class="stars" data-rating="5" aria-label="5 out of 5 stars"></div>
+        </div>
+        <p class="review-text">
+         “One of the best experiences we’ve had. They understood our theme and executed it exactly how we imagined. Highly recommended!”
+        </p>
+      </li>
+
+      <li class="review-card" data-i="1">
+        <div class="review-header">
+          <h3 class="review-name">Aman K.</h3>
+          <div class="stars" data-rating="5" aria-label="4 out of 5 stars"></div>
+        </div>
+        <p class="review-text">
+         “So happy with the service! The floral decor was exactly like the reference photo I shared. The food tasted homemade in a good way.”
+        </p>
+      </li>
+
+      <li class="review-card" data-i="2">
+        <div class="review-header">
+          <h3 class="review-name">Sneha R.</h3>
+          <div class="stars" data-rating="5" aria-label="5 out of 5 stars"></div>
+        </div>
+        <p class="review-text">
+          “They managed our daughter’s birthday beautifully. The team was calm, well-coordinated, and super polite with all guests.”
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="site-footer" id="footer">
+    <div class="footer-wrapper">
+  
+      <!-- BRAND SECTION -->
+      <div class="footer-brand">
+        <img src="LOGO.png" alt="Chettayis Logo" class="footer-logo">
+  
+        <div>
+          <h3 class="brand-title">Chettayis Events</h3>
+          <p class="brand-tag">Crafting memorable experiences with taste & tradition.</p>
+        </div>
+      </div>
+  
+      <!-- FOOTER GRID -->
+      <div class="footer-grid">
+  
+        <!-- CONTACT -->
+        <div class="footer-box">
+          <h4>Contact</h4>
+          <ul class="footer-list">
+            <li>Chettayis Events 
+Alappuzha 
+Thumpoly 
+</li>
+            <li><a href="tel:+918921276403">+91 8921276403</a></li>
+            <li><a href="eventschettayis@gmail.com">eventschettayis@gmail.com</a></li>
+          </ul>
+  
+          <div class="socials">
+           
+    <a href="https://www.instagram.com/chettayis_events?igsh=ODdrMnp6ZWNxNnJm" class="social"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+   
+          </div>
+        </div>
+  
+        <!-- QUICK LINKS -->
+        <div class="footer-box">
+          <h4>Quick Links</h4>
+          <ul class="footer-list">
+              <li><a href="/">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews-title">Reviews</a></li>
+    
+          </ul>
+        </div>
+  
+        <!-- SERVICES -->
+        <div class="footer-box">
+          <h4>Services</h4>
+          <ul class="footer-list">
+            <li>Event Management & Planning</li>
+            <li>Photography & Videography</li>
+            <li>Guest Management & Hospitality</li>
+            <li>Cuisine & Catering</li>
+          </ul>
+        </div>
+  
+        <form class="subscribe" id="wa-subscribe-form">
+  <input id="wa-name" type="text" placeholder="Your name (optional)">
+
+  <textarea id="wa-msg" rows="3" placeholder="Type your request..." required></textarea>
+  <button type="submit">Send Message</button>
+  <div id="wa-feedback"></div>
+</form>
+
+  
+      </div>
+    </div>
+  
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Chettayis Events</p>
+  <p>Designed by <a href="https://opulentnexus.co.in" target="_blank">Opulent Nexus</a></p>
+
+      
+    </div>
+  </footer>
+  
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  
+
+
+
+
+
+<script src="script.js"></script>
+
+
+
+
+
+
+<script>
+(function () {
+  const form = document.getElementById('wa-subscribe-form');
+  if (!form) return;
+
+  /* YOUR WHATSAPP NUMBER HERE (no +, no spaces) */
+  const DEST_PHONE = '+918921276403';
+
+  /* Build WhatsApp message */
+  function buildMessage({ name, email, message }) {
+    let text = " Inquiry from website :\n\n";
+    if (name) text += `Name: ${name}\n`;
+   
+    text += `Message: ${message}\n\n`;
+   
+    return text;
+  }
+
+  /* Open WhatsApp with prefilled text */
+  function openWhatsApp(phone, text) {
+    const encoded = encodeURIComponent(text);
+    const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
+    window.open(url, "_blank");
+  }
+
+  /* Form submit handler */
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = form.querySelector("#wa-name").value.trim();
+    const email = form.querySelector("#wa-email").value.trim();
+    const message = form.querySelector("#wa-msg").value.trim();
+    const feedback = document.getElementById("wa-feedback");
+
+    /* Validation */
+    if (!message) {
+      feedback.textContent = "Please type your message.";
+      feedback.style.color = "crimson";
+      return;
+    }
+
+    if (email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        feedback.textContent = "Please enter a valid email.";
+        feedback.style.color = "crimson";
+        return;
+      }
+    }
+
+    /* Build full WhatsApp message */
+    const fullMessage = buildMessage({ name, email, message });
+
+    /* Open WhatsApp */
+    openWhatsApp(DEST_PHONE, fullMessage);
+
+    /* Feedback */
+    feedback.textContent = "WhatsApp opened — please press Send.";
+    feedback.style.color = "#25D366"; // WhatsApp green
+
+    /* Clear message field only */
+    form.querySelector("#wa-msg").value = "";
+
+    /* Clear feedback after 5 seconds */
+    setTimeout(() => (feedback.textContent = ""), 5000);
+  });
+})();
+</script>
+
+
+
+
+<script>
+(function () {
+  // ensure .js class is present (no-flash)
+  document.documentElement.classList.add('js');
+
+  const hero = document.querySelector('.hero-content');
+  if (!hero) return;
+
+  // quick safety: set a base stagger variable for CSS use
+  hero.style.setProperty('--stagger-base', '100ms');
+
+  // fallback: if no IO, show immediately
+  if (!('IntersectionObserver' in window)) {
+    hero.classList.add('is-visible');
+    return;
+  }
+
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        hero.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.18,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  io.observe(hero);
+})();
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
+
