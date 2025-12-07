@@ -516,6 +516,7 @@ html, body {
 .about-section{
   max-width:1150px;
   margin:60px auto;
+  
   padding:40px;
   
  
@@ -549,15 +550,19 @@ html, body {
   color:var(--accent);
   font-weight:700;
   letter-spacing:1px;
+   font-family: "Smooch Sans", sans-serif;
+   font-size: 29.3px;
 }
 h2{
   font-size:28px;
-  font-weight:800;
+  font-weight:400;
   margin:10px 0;
+  font-family: "Archivo Black", sans-serif;
 }
 .lead{
   color:var(--muted);
   font-size:16px;
+  font-family: "Elms Sans", sans-serif;
   line-height:1.6;
 }
 
@@ -566,6 +571,8 @@ h2{
   display:grid;
   gap:20px;
   padding-top: 20px;
+  font-family: "Elms Sans", sans-serif;
+  font-size: 15.63px;
 }
 .feature{
   background:#dadadb;
@@ -1027,7 +1034,8 @@ footer {
 .gallery-title {
   font-size: 1.9rem;
   padding-bottom: 30px;
-  font-weight: 700;
+   font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
   margin-bottom: 18px;
   color: #222;
 }
@@ -1253,6 +1261,19 @@ footer {
 
 
 
+/* Extra padding-top for mobile */
+@media (max-width: 600px) {
+  .gallery-section {
+    padding-top: 10px; /* change value as needed */
+  }
+}
+
+
+
+
+
+
+
 
 
 /* Container */
@@ -1271,6 +1292,7 @@ footer {
 .reviews h2 {
   text-align: center;
   margin-bottom: 1.5rem;
+   font-family: "Archivo Black", sans-serif;
   font-size: 1.8rem;
 }
 
@@ -1351,6 +1373,7 @@ footer {
 /* Review Text */
 .review-text {
   margin-top: 0.8rem;
+  font-family: "Elms Sans", sans-serif;
   line-height: 1.5;
   color: #444;
 }
@@ -1676,5 +1699,8 @@ footer a:hover {
 }
 
 
+
+
+ 
 
 
