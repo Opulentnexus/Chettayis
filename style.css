@@ -260,14 +260,34 @@ img {
     content: "";  /* default */
   }
 
-  /* Assign icons by menu item order */
-  .nav-links li:nth-child(1) a::before { content: "\f015"; } /* Home icon */
-  .nav-links li:nth-child(2) a::before { content: "\f007"; } /* About (User) */
-  .nav-links li:nth-child(3) a::before { content: "\f013"; } /* Services (Gear) */
-  .nav-links li:nth-child(4) a::before { content: "\f2e7"; } /* Menu (Utensils) */
-  .nav-links li:nth-child(5) a::before { content: "\f03e"; } /* Gallery (Image) */
-  .nav-links li:nth-child(6) a::before { content: "\f005"; } /* Reviews (Star) */
-  .nav-links li:nth-child(7) a::before { content: "\f095"; } /* Contact (Phone) */
+.nav-links li:nth-child(1) a::before { 
+  content: "\f015"; 
+}
+
+/* About (User) */
+.nav-links li:nth-child(2) a::before { 
+  content: "\f007"; 
+}
+
+/* Services (Menu icon instead of Gear) */
+.nav-links li:nth-child(3) a::before { 
+  content: "\f2e7";  /* Utensils icon moved here */
+}
+
+/* Gallery */
+.nav-links li:nth-child(4) a::before { 
+  content: "\f03e"; 
+}
+
+/* Reviews */
+.nav-links li:nth-child(5) a::before { 
+  content: "\f005"; 
+}
+
+/* Contact */
+.nav-links li:nth-child(6) a::before { 
+  content: "\f095"; 
+}
 
 }
 
